@@ -12,4 +12,30 @@ Notice that you may not slant the container.
 
 ### Formula - Maximum area = width - (effective height)
 
-And we do this for every element and store the maximum area in ***maxArea*** variable and we return it 
+And we do this for every element and store the maximum area in ***maxArea*** variable and we return it
+
+* Another thing to keep in mind is that
+While incrementing the left we need to check ***height[left] < height[right]*** and vice versa because anyways width is shrinking and the only way that the better area can be constructed if we get a more height on the other side as well 
+
+```java
+    public static int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int maxArea = 0, currentArea = 0;
+
+        while(left < right) {
+            currentArea = (Integer.min(height[left], height[right]) * (right - left));
+            System.out.println(currentArea);
+            if(maxArea < currentArea) {
+                maxArea = currentArea;
+            }
+            if(height[left] < height[right]) {
+                left++;
+            } else if(height[left] >= height[right]) {
+                right--;
+            }
+        }
+        return maxArea;
+    }
+
+```
